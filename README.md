@@ -118,3 +118,31 @@ chmod +x ~/sync_logs.sh
 ---
 
 ### 🔹 6. Automate with `cron` (Optional)
+
+Edit your crontab:
+```bash
+crontab -e
+```
+
+Add:
+```bash
+*/5 * * * * /home/badri/healthcheck.sh
+*/10 * * * * /home/badri/sync_logs.sh
+```
+
+---
+
+## ✅ Outcome
+
+You now have:
+
+- 💡 Health monitoring of your web server with logs.
+- 🔐 Secure, timestamped backups of server logs.
+- 🔁 Fully automated system via cron jobs.
+
+---
+
+## 📌 Notes
+
+- Use `journalctl` or `systemctl status ssh` on the server if SSH isn't responding.
+- Test scripts manually before scheduling them via `cron`.
