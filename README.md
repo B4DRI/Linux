@@ -1,4 +1,4 @@
-# 💪 Linux Networking Study Case: Automated File Sync & Web Service Health Monitor
+# Linux Networking Study Case: Automated File Sync & Web Service Health Monitor
 
 **Author**: Badri Mahazir  
 **Environment**: WSL Linux (Client) ↔ Oracle VirtualBox Linux (Server)  
@@ -6,13 +6,13 @@
 
 ---
 
-## 📘 Overview
+## Overview
 
 This case study simulates a real-world scenario for a junior DevOps engineer. You will monitor a web server's health and automatically retrieve its log files at scheduled intervals for backup and analysis — all within your own controlled environment.
 
 ---
 
-## 🤩 Scenario
+## Scenario
 
 > Your web server is running on a **VirtualBox Linux** guest machine. From your **WSL Linux** host machine, you are responsible for:
 > 
@@ -23,7 +23,7 @@ This case study simulates a real-world scenario for a junior DevOps engineer. Yo
 
 ---
 
-## 🔧 Prerequisites
+## Prerequisites
 
 - Ensure WSL and VirtualBox are on the same network (bridged or host-only).
 - SSH is enabled and running on the VirtualBox guest.
@@ -31,9 +31,9 @@ This case study simulates a real-world scenario for a junior DevOps engineer. Yo
 
 ---
 
-## 📂 Step-by-Step Guide
+## Step-by-Step Guide
 
-### 🔹 1. Check IP Address and Network Connectivity
+### 1. Check IP Address and Network Connectivity
 
 **On WSL:**
 ```bash
@@ -43,7 +43,7 @@ ping <VM_IP>  # Replace with your VM's IP address
 
 ---
 
-### 🔹 2. SSH into the VirtualBox Server
+### 2. SSH into the VirtualBox Server
 
 ```bash
 ssh youruser@<VM_IP>
@@ -56,7 +56,7 @@ ssh-copy-id youruser@<VM_IP>
 
 ---
 
-### 🔹 3. Health Check Using `curl`
+### 3. Health Check Using `curl`
 
 Create a health check script on WSL:
 
@@ -85,7 +85,7 @@ chmod +x ~/healthcheck.sh
 
 ---
 
-### 🔹 4. Simulate a Web Log File on VirtualBox
+### 4. Simulate a Web Log File on VirtualBox
 
 **On VM:**
 ```bash
@@ -94,7 +94,7 @@ echo "User accessed homepage at $(date)" >> ~/web.log
 
 ---
 
-### 🔹 5. Secure File Transfer with `scp`
+### 5. Secure File Transfer with `scp`
 
 On WSL:
 ```bash
@@ -117,7 +117,7 @@ chmod +x ~/sync_logs.sh
 
 ---
 
-### 🔹 6. Automate with `cron` (Optional)
+### 6. Automate with `cron` (Optional)
 
 Edit your crontab:
 ```bash
@@ -132,17 +132,17 @@ Add:
 
 ---
 
-## ✅ Outcome
+## Outcome
 
 You now have:
 
-- 💡 Health monitoring of your web server with logs.
-- 🔐 Secure, timestamped backups of server logs.
-- 🔁 Fully automated system via cron jobs.
+- Health monitoring of your web server with logs.
+- Secure, timestamped backups of server logs.
+- Fully automated system via cron jobs.
 
 ---
 
-## 📌 Notes
+## Notes
 
 - Use `journalctl` or `systemctl status ssh` on the server if SSH isn't responding.
 - Test scripts manually before scheduling them via `cron`.
