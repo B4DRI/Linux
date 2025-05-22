@@ -59,3 +59,62 @@ ssh-copy-id youruser@<VM_IP>
 ### 🔹 3. Health Check Using `curl`
 
 Create a health check script on WSL:
+
+```bash
+nano ~/healthcheck.sh
+```
+
+**Script Content:**
+```bash
+#!/bin/bash
+
+URL="http://<VM_IP>"
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+
+if [ "$STATUS" == "200" ]; then
+    echo "$(date): Web server is UP" >> ~/server_health.log
+else
+    echo "$(date): Web server is DOWN or ERROR $STATUS" >> ~/server_health.log
+fi
+```
+
+Make it executable:
+```bash
+chmod +x ~/healthcheck.sh
+```
+
+---
+
+### 🔹 4. Simulate a Web Log File on VirtualBox
+
+**On VM:**
+```bash
+echo "User accessed homepage at $(date)" >> ~/web.log
+```
+
+---
+
+### 🔹 5. Secure File Transfer with `scp`
+
+On WSL:
+```bash
+mkdir -p ~/vm_logs
+
+nano ~/sync_logs.sh
+```
+
+**Script Content:**
+```bash
+#!/bin/bash
+
+scp youruser@<VM_IP>:/home/youruser/web.log ~/vm_logs/web-$(date +%Y%m%d%H%M%S).log
+```
+
+Make it executable:
+```bash
+chmod +x ~/sync_logs.sh
+```
+
+---
+
+### 🔹 6. Automate with `cron` (Optional)
